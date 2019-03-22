@@ -48,7 +48,6 @@ def Play():
     master.title("Radar")
 
     ship = Ship_init()
-    print(ship)
     drowned = []
 
     def clicked(x,y):
@@ -78,9 +77,7 @@ def Play():
             messagebox.showinfo("You Lost","You have no missiles left.\nYour ship was Drowned.",parent = master)
             master.destroy()
 
-        print(x,y)
-
-
+            
     Buttons = []
     for i in range(7):
         for j in range(7):
