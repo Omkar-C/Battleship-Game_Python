@@ -44,8 +44,6 @@ def Play():
         else:
             return Ship_init()
 
-
-
     master = Tk()
     master.title("Radar")
 
@@ -102,8 +100,6 @@ def Instructions():
     message = 'Captain!!!, First Officer Jones Reporting.\nEnemy Ships have started attacking us.\nOur Radars are jammed and so are theirs.\nWe do have limited missiles and we need to face our enemy soon or our Motherland will be in grave danger.\nIntelligence report has informed there are three Enemy Battleships.\nCaptain, it is up to you to save us.\nGod Help us.\n\nYou need to predict enemy ships locations and annihilate them before they destroy you.To destroy a ship, you need to hit it in three locations.\nAll the best, Captain.'
     Messagedisp = Message(Instruct,text = message,font = ('arial',20),fg = 'black',bg = 'white')
     Messagedisp.pack()
-
-
 
 Main = Tk()
 Main.title("Battleship")
