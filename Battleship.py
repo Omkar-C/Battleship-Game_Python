@@ -2,12 +2,17 @@ from tkinter import Button,Label,Tk,font,messagebox,Message
 from random import randrange
 
 count = 0
+
 def Play():
     global  count
     count = 0
     wincount = 25
 
+
     def Ship_verify(ship):
+
+        ''' Ships locations verification when two or more ships acquire same location.'''
+
         for i in ship[0]:
             if i in ship[1] or i in ship[2]:
                 return False
@@ -17,6 +22,9 @@ def Play():
         return True
 
     def Ship_init():
+
+        ''' Generates a list of list of tuples. Each list in main list is location of ships and co-ordinates are stored in tuple(x,y) format. '''
+
         ship = []
         for i in range(3):
             a = randrange(2,7)
@@ -44,13 +52,19 @@ def Play():
         else:
             return Ship_init()
 
+
+    #Gui for radar or ship hitting menu
     master = Tk()
     master.title("Radar")
 
+    # Global Varibles required
     ship = Ship_init()
     drowned = []
 
     def clicked(x,y):
+
+        ''' For each click, check if it's a hit or kill.  If it's a hit remove the location. Report each incident as a message to the user.'''
+
         global count
         count=count + 1
         temp = tuple([x,y])
@@ -77,13 +91,14 @@ def Play():
             messagebox.showinfo("You Lost","You have no missiles left.\nYour ship was Drowned.",parent = master)
             master.destroy()
 
-            
+    #Buttons on Radar page
     Buttons = []
     for i in range(7):
         for j in range(7):
             Buttons.append(Button(master,text = '%(x)d%(y)d'%{'x':i+1,'y':j+1},bg="lightgreen",fg="blue",command = lambda a=i+1,b=j+1: clicked(a,b),font = ('arial',15,'bold'),relief = 'raised',activeforeground ='red',activebackground = 'yellow'))
             Buttons[(i)*7 + (j)].grid(row = i,column = j)
 
+    #labels for missiles remaining
     MissileLabels = Label(master,text = "Missiles Remaining = %(this)d"%{'this':wincount-count},width = 33,height = 3,bg = 'cyan',fg = 'black',font = ('arial',15,'bold'))
     MissileLabels.grid(row = 7,column = 0 , columnspan = 7)
     master.configure(bg = 'white')
@@ -91,12 +106,18 @@ def Play():
 
 #Instructions
 def Instructions():
+
+    # GUI construct for How to play
+    ''' A simple guide to the game'''
+
     Instruct = Tk()
     Instruct.title("How to Play")
 
     message = 'Captain!!!, First Officer Jones Reporting.\nEnemy Ships have started attacking us.\nOur Radars are jammed and so are theirs.\nWe do have limited missiles and we need to face our enemy soon or our Motherland will be in grave danger.\nIntelligence report has informed there are three Enemy Battleships.\nCaptain, it is up to you to save us.\nGod Help us.\n\nYou need to predict enemy ships locations and annihilate them before they destroy you.To destroy a ship, you need to hit it in three locations.\nAll the best, Captain.'
     Messagedisp = Message(Instruct,text = message,font = ('arial',20),fg = 'black',bg = 'white')
     Messagedisp.pack()
+
+#GUI for main page
 
 Main = Tk()
 Main.title("Battleship")
